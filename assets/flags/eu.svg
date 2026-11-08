@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40">
+  <defs>
+    <path id="eu-star" fill="#ffcc00" d="M0,-3 L0.71,-0.97 L2.85,-0.93 L1.14,0.37 L1.76,2.43 L0,1.2 L-1.76,2.43 L-1.14,0.37 L-2.85,-0.93 L-0.71,-0.97 Z"/>
+  </defs>
+  <rect width="60" height="40" fill="#003399"/>
+  <use href="#eu-star" x="42" y="20"/><use href="#eu-star" x="40.4" y="26"/><use href="#eu-star" x="36" y="30.4"/>
+  <use href="#eu-star" x="30" y="32"/><use href="#eu-star" x="24" y="30.4"/><use href="#eu-star" x="19.6" y="26"/>
+  <use href="#eu-star" x="18" y="20"/><use href="#eu-star" x="19.6" y="14"/><use href="#eu-star" x="24" y="9.6"/>
+  <use href="#eu-star" x="30" y="8"/><use href="#eu-star" x="36" y="9.6"/><use href="#eu-star" x="40.4" y="14"/>
+</svg>

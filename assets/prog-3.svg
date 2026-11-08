@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="SEMINARS"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101c33"/><stop offset="1" stop-color="#070b15"/></linearGradient><radialGradient id="vig" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#1b2c4d" stop-opacity="0.55"/><stop offset="1" stop-color="#070b15" stop-opacity="0"/></radialGradient><linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4a6b"/><stop offset="1" stop-color="#141d31"/></linearGradient><linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a72"/><stop offset="1" stop-color="#b3162c"/></linearGradient><radialGradient id="redglow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff3651" stop-opacity="0.7"/><stop offset="1" stop-color="#ff3651" stop-opacity="0"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><rect width="400" height="300" fill="url(#vig)"/>
+  <!-- screen with chart -->
+  <rect x="70" y="50" width="260" height="150" rx="8" fill="#0e1626" stroke="#46587e" stroke-width="2"/>
+  <g fill="url(#red)" opacity="0.9">
+    <rect x="100" y="150" width="26" height="30"/><rect x="138" y="128" width="26" height="52"/>
+    <rect x="176" y="104" width="26" height="76"/><rect x="214" y="120" width="26" height="60"/>
+  </g>
+  <path d="M100 150 l38 -22 38 -24 38 16 56 -28" fill="none" stroke="#ff5a72" stroke-width="3"/>
+  <!-- AI node motif -->
+  <g stroke="#3b62d8" stroke-width="2" opacity="0.7"><circle cx="288" cy="92" r="6" fill="#3b62d8"/>
+  <line x1="288" y1="92" x2="262" y2="120"/><line x1="288" y1="92" x2="300" y2="128"/></g>
+  <!-- audience -->
+  <g fill="#10192e"><circle cx="56" cy="250" r="16"/><circle cx="96" cy="250" r="16"/><circle cx="136" cy="250" r="16"/><circle cx="176" cy="250" r="16"/><circle cx="216" cy="250" r="16"/><circle cx="256" cy="250" r="16"/><circle cx="296" cy="250" r="16"/><circle cx="336" cy="250" r="16"/></g>
+  <rect x="0" y="266" width="400" height="34" fill="#0a0f1c"/>
+<text x="200.0" y="284" text-anchor="middle" fill="#7f8aa1" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">SEMINARS</text></svg>

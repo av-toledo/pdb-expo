@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="INDUSTRY EXPO"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101c33"/><stop offset="1" stop-color="#070b15"/></linearGradient><radialGradient id="vig" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#1b2c4d" stop-opacity="0.55"/><stop offset="1" stop-color="#070b15" stop-opacity="0"/></radialGradient><linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4a6b"/><stop offset="1" stop-color="#141d31"/></linearGradient><linearGradient id="red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a72"/><stop offset="1" stop-color="#b3162c"/></linearGradient><radialGradient id="redglow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff3651" stop-opacity="0.7"/><stop offset="1" stop-color="#ff3651" stop-opacity="0"/></radialGradient></defs><rect width="400" height="300" fill="url(#bg)"/><rect width="400" height="300" fill="url(#vig)"/>
+  <!-- perspective floor -->
+  <polygon points="0,300 400,300 300,150 100,150" fill="#0c1326"/>
+  <polygon points="0,300 400,300 300,150 100,150" fill="#0c1326"/>
+  <line x1="200" y1="150" x2="200" y2="300" stroke="#22304d" stroke-width="2"/>
+  <line x1="100" y1="150" x2="0" y2="300" stroke="#22304d" stroke-width="1.5"/>
+  <line x1="300" y1="150" x2="400" y2="300" stroke="#22304d" stroke-width="1.5"/>
+  <!-- booths -->
+  <g fill="url(#steel)" stroke="#46587e" stroke-width="2">
+    <rect x="60" y="120" width="90" height="70" rx="4"/>
+    <rect x="250" y="120" width="90" height="70" rx="4"/>
+  </g>
+  <!-- banners -->
+  <rect x="70" y="96" width="70" height="16" rx="3" fill="url(#red)"/>
+  <rect x="260" y="96" width="70" height="16" rx="3" fill="#3b62d8"/>
+  <!-- arch banner -->
+  <rect x="150" y="60" width="100" height="20" rx="4" fill="url(#red)"/>
+  <!-- people dots -->
+  <g fill="#10192e"><circle cx="180" cy="240" r="12"/><circle cx="220" cy="250" r="12"/><circle cx="150" cy="265" r="12"/><circle cx="260" cy="262" r="12"/></g>
+<text x="200.0" y="284" text-anchor="middle" fill="#7f8aa1" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">INDUSTRY EXPO</text></svg>

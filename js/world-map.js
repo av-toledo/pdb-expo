@@ -19,15 +19,16 @@
 
   /* ---- Participating regions ----
      label.pos avoids overlap in the dense East-Asia cluster. */
-  const HUB = { name: 'TAIWAN', lon: 121, lat: 23.7, hub: true, pos: 'below' };
+  const HUB = { name: 'MANILA', lon: 120.98, lat: 14.6, hub: true, pos: 'below' };
   const MARKERS = [
     { name: 'UNITED STATES', lon: -98, lat: 39, pos: 'below' },
     { name: 'EUROPE', lon: 12, lat: 50, pos: 'above' },
     { name: 'SOUTH AMERICA', lon: -58, lat: -12, pos: 'below' },
     { name: 'JAPAN', lon: 139, lat: 37, pos: 'right' },
-    { name: 'SOUTH KOREA', lon: 127.5, lat: 37, pos: 'left' },
+    { name: 'SOUTH KOREA', lon: 127.5, lat: 37, pos: 'above' },
+    { name: 'TAIWAN', lon: 121, lat: 23.7, pos: 'left' },
     HUB,
-    { name: 'SOUTHEAST ASIA', lon: 104, lat: 9, pos: 'below' },
+    { name: 'SOUTHEAST ASIA', lon: 100, lat: 7, pos: 'left' },
     { name: 'AUSTRALIA', lon: 134, lat: -25, pos: 'below' },
   ];
   // particles travel from each region toward Taiwan (the hub)

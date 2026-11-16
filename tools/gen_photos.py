@@ -14,6 +14,9 @@ JOBS = {
     "hero-2.jpg":    ("close up of a gloved hand using a dual action polisher on a glossy black car panel, car detailing, reflections", 720, 540, 7),
     "hero-3.jpg":    ("keynote speaker on a modern conference stage presenting to a large audience, business technology summit, big LED screen, stage lights", 720, 540, 23),
     "skyline.jpg":   ("Taipei 101 and city skyline at dusk blue hour, glowing city lights, wide cinematic panorama, moody dark blue sky", 1280, 760, 31),
+    "manila.jpg": ("Manila Makati city skyline at dusk, modern glass skyscrapers, Philippines, warm golden-hour light, wide cinematic panorama", 1100, 680, 61),
+    "about-hero.jpg": ("premium international automotive expo hall with exhibition booths and a crowd, dramatic red and blue stage lighting, cinematic wide atmosphere", 1600, 660, 63),
+    "about-intro.jpg": ("professional paintless dent repair technician inspecting a glossy black luxury car panel under a bright inspection light, premium workshop", 760, 620, 65),
     "why-champ.jpg": ("paintless dent repair championship competition, technician working intensely on a car under bright arena spotlights, gold trophy nearby", 720, 480, 41),
     "why-summit.jpg": ("business and AI summit, professional speaker presenting with futuristic holographic data charts on a large screen, modern conference audience", 720, 480, 47),
     "why-network.jpg": ("diverse group of business professionals networking and shaking hands at a conference, modern venue", 720, 480, 5),
@@ -30,7 +33,7 @@ def fetch(name, prompt, w, h, seed):
         return f"skip (already {os.path.getsize(dest)//1024}KB)"
     url = ("https://image.pollinations.ai/prompt/"
            + urllib.parse.quote(prompt + STYLE)
-           + f"?width={w}&height={h}&seed={seed}&nologo=true&model=flux")
+           + f"?width={w}&height={h}&seed={seed}&nologo=true&model=turbo")
     for attempt in range(4):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -41,8 +44,8 @@ def fetch(name, prompt, w, h, seed):
             open(dest, "wb").write(data)
             return f"ok {len(data)//1024}KB {w}x{h}"
         except urllib.error.HTTPError as e:
-            if e.code == 429 and attempt < 3:
-                time.sleep(18)
+            if e.code in (429, 500, 502, 503) and attempt < 3:
+                time.sleep(15)
                 continue
             return f"ERROR {e}"
         except Exception as e:

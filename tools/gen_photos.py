@@ -1,58 +1,55 @@
 #!/usr/bin/env python3
-"""Generate photorealistic images for the homepage via Pollinations (free, no key).
-Saves JPEGs into assets/. Cohesive cinematic dark-blue + red brand look."""
+"""Regenerate site photos with a NATURAL, editorial look (not neon/AI-cinematic).
+Pollinations (free). A unified film grade is applied afterwards by grade_photos.py."""
 import os, ssl, time, urllib.parse, urllib.request
 
-SSL_CTX = ssl._create_unverified_context()  # macOS python lacks CA bundle; images are public
-
+SSL_CTX = ssl._create_unverified_context()
 A = os.path.join(os.path.dirname(__file__), "..", "assets")
-STYLE = ", cinematic, dark navy blue and red accent lighting, professional, high detail, photorealistic"
+MODEL = "flux"  # flux = more photoreal; falls back handled by retry
+STYLE = (", natural soft daylight, realistic true-to-life muted colours, shallow depth of field, "
+         "candid editorial documentary photograph, 35mm, fine detail, no text")
 
 JOBS = {
-    # filename: (prompt, width, height, seed)
-    "hero-tall.jpg": ("a professional automotive technician performing paintless dent repair on a luxury black sports car, holding a metal PDR rod, focused, dramatic studio lighting", 720, 1040, 11),
-    "hero-2.jpg":    ("close up of a gloved hand using a dual action polisher on a glossy black car panel, car detailing, reflections", 720, 540, 7),
-    "hero-3.jpg":    ("keynote speaker on a modern conference stage presenting to a large audience, business technology summit, big LED screen, stage lights", 720, 540, 23),
-    "skyline.jpg":   ("Taipei 101 and city skyline at dusk blue hour, glowing city lights, wide cinematic panorama, moody dark blue sky", 1280, 760, 31),
-    "manila.jpg": ("Manila Makati city skyline at dusk, modern glass skyscrapers, Philippines, warm golden-hour light, wide cinematic panorama", 1100, 680, 61),
-    "about-hero.jpg": ("premium international automotive expo hall with exhibition booths and a crowd, dramatic red and blue stage lighting, cinematic wide atmosphere", 1600, 660, 63),
-    "about-intro.jpg": ("professional paintless dent repair technician inspecting a glossy black luxury car panel under a bright inspection light, premium workshop", 760, 620, 65),
-    "why-champ.jpg": ("paintless dent repair championship competition, technician working intensely on a car under bright arena spotlights, gold trophy nearby", 720, 480, 41),
-    "why-summit.jpg": ("business and AI summit, professional speaker presenting with futuristic holographic data charts on a large screen, modern conference audience", 720, 480, 47),
-    "why-network.jpg": ("diverse group of business professionals networking and shaking hands at a conference, modern venue", 720, 480, 5),
-    "why-surface.jpg": ("macro water beading on a freshly ceramic coated glossy black car surface, droplets, sharp reflections", 720, 480, 9),
-    "prog-1.jpg":    ("automotive paintless dent repair competition, technician working fast on a car under bright arena lights, intense", 800, 600, 14),
-    "prog-2.jpg":    ("row of premium car detailing product bottles and ceramic coatings on a trade show booth table, studio lighting", 800, 600, 18),
-    "prog-3.jpg":    ("business seminar workshop, presenter at a podium with an audience taking notes, modern conference room", 800, 600, 27),
-    "prog-4.jpg":    ("busy automotive trade show expo hall with exhibitor booths, crowds and banners, bright lighting, wide shot", 800, 600, 33),
+    "hero-tall.jpg":   ("a focused automotive technician carefully repairing a small dent on a dark car body panel in a clean professional workshop, natural window light", 720, 1040, 101),
+    "hero-2.jpg":      ("close up of a detailer's gloved hand buffing a polished car panel, soft natural daylight, subtle reflections", 720, 540, 102),
+    "hero-3.jpg":      ("a speaker presenting at a professional business summit on a stage with a seated audience, warm natural ambient light", 720, 540, 103),
+    "skyline.jpg":     ("Manila Makati skyline at golden hour, modern skyscrapers, soft warm daylight, realistic wide cityscape photograph", 1280, 760, 104),
+    "why-champ.jpg":   ("an automotive technician concentrating while repairing a car dent at a skills competition, professional workshop, natural light", 720, 480, 105),
+    "why-network.jpg": ("business professionals in smart attire talking and networking at a conference, candid, soft natural indoor light", 720, 480, 106),
+    "why-summit.jpg":  ("attendees at a business seminar in a modern conference room listening to a presenter, natural light", 720, 480, 107),
+    "why-surface.jpg": ("macro close up of water droplets beading on a freshly polished glossy car surface, soft daylight", 720, 480, 108),
+    "prog-1.jpg":      ("an automotive paintless dent repair technician working carefully on a car panel, professional workshop, natural light", 800, 600, 109),
+    "prog-2.jpg":      ("a tidy display of car detailing products and hand tools on a table at an industry trade show booth, soft even lighting", 800, 600, 110),
+    "prog-3.jpg":      ("people collaborating at a professional business workshop around a table in a modern venue, natural light", 800, 600, 111),
+    "prog-4.jpg":      ("a busy automotive trade exhibition hall with booths and visitors walking, natural ambient lighting, wide documentary photograph", 800, 600, 112),
+    "about-hero.jpg":  ("wide interior view of a modern automotive trade exhibition hall with booths and attendees, natural ambient daylight", 1600, 660, 113),
+    "about-intro.jpg": ("an automotive technician inspecting the panel of a car in a professional workshop, natural window light, candid", 760, 620, 114),
+    "manila.jpg":      ("Manila Makati skyline at golden hour, modern skyscrapers along the bay, warm soft daylight, realistic wide cityscape photograph", 1100, 680, 115),
 }
 
 def fetch(name, prompt, w, h, seed):
     dest = os.path.join(A, name)
-    if os.path.exists(dest) and os.path.getsize(dest) > 4000:
-        return f"skip (already {os.path.getsize(dest)//1024}KB)"
     url = ("https://image.pollinations.ai/prompt/"
            + urllib.parse.quote(prompt + STYLE)
-           + f"?width={w}&height={h}&seed={seed}&nologo=true&model=turbo")
-    for attempt in range(4):
+           + f"?width={w}&height={h}&seed={seed}&nologo=true&model={MODEL}")
+    for attempt in range(5):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=180, context=SSL_CTX) as r:
+            with urllib.request.urlopen(req, timeout=200, context=SSL_CTX) as r:
                 data = r.read()
             if len(data) < 4000:
                 raise ValueError(f"too small ({len(data)}b)")
             open(dest, "wb").write(data)
             return f"ok {len(data)//1024}KB {w}x{h}"
         except urllib.error.HTTPError as e:
-            if e.code in (429, 500, 502, 503) and attempt < 3:
-                time.sleep(15)
-                continue
+            if e.code in (429, 402, 500, 502, 503) and attempt < 4:
+                time.sleep(16); continue
             return f"ERROR {e}"
         except Exception as e:
-            if attempt < 3:
+            if attempt < 4:
                 time.sleep(8); continue
             return f"ERROR {e}"
 
 for name, (prompt, w, h, seed) in JOBS.items():
     print(f"{name}: {fetch(name, prompt, w, h, seed)}", flush=True)
-    time.sleep(5)   # stay under the rate limit
+    time.sleep(5)
